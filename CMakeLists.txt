@@ -79,4 +79,3 @@ install_basic_package_files(${PROJECT_NAME}
 
 # Add the uninstall target
 include(AddUninstallTarget)
-
