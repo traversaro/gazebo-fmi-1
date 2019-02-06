@@ -90,6 +90,8 @@ namespace gazebo_fmi
     /// \brief Plugin for simulating a torque-speed curve for actuators.
     class GAZEBO_VISIBLE FMIActuatorPlugin : public gazebo::ModelPlugin
     {
+        public: ~FMIActuatorPlugin();
+
         /// Documentation inherited
         public: void Load(gazebo::physics::ModelPtr _parent, sdf::ElementPtr _sdf);
 

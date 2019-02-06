@@ -31,6 +31,7 @@
 
 #include <experimental/filesystem>
 
+#include <gazebo_fmi/FMULogger.hh>
 #include <gazebo_fmi/SDFConfigurationParsing.hh>
 
 
@@ -184,6 +185,7 @@ bool FMIActuatorPlugin::ParseParameters(gazebo::physics::ModelPtr _parent, sdf::
         return false;
       }
 
+
       // Legacy tags, used only for backcompatibiltiy
       if (elem->HasElement("actuatorInputName"))
       {
@@ -274,6 +276,9 @@ bool FMIActuatorPlugin::LoadFMUs(gazebo::physics::ModelPtr _parent)
             return false;
         }
         actuator.outputVarBuffers.resize(actuator.outputVarBuffers.size());
+
+        // Enable logging (this should be regularted by an option
+        FMULoggerSingleton::GetInstance().addFMU(instanceName, &(actuator.fmu));
     }
 
     return true;
@@ -424,3 +429,11 @@ gazebo::physics::JointPtr FMIActuatorPlugin::FindJointInModel(const std::string&
     } 
     return joint;
 } 
+
+FMIActuatorPlugin::~FMIActuatorPlugin()
+{
+    //for (unsigned int i = 0; i < this->actuators.size(); i++)
+    {
+        FMULoggerSingleton::GetInstance().removeFMU(actuator.fmu.getInstanceName());
+    }
+}

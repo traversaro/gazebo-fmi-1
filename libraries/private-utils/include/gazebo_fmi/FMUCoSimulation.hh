@@ -12,6 +12,7 @@
 #define GAZEBO_FMI_FMU_COSIMULATION
 
 #include <memory>
+#include <string>
 #include <vector>
 
 // For fmi2ValueReference
@@ -61,6 +62,10 @@ namespace gazebo_fmi
         /// \brief Get output variables
         bool getOutputVariables(const std::vector<fmi2_value_reference_t>& outputVariableReferences,
                                 std::vector<double>& outputVariables);
+
+        /// \brief Get instance name
+        std::string getInstanceName();
+
         /// \brief Unload
         /// Unload the fmu, or do nothing if no fmu was loaded
         void unload();

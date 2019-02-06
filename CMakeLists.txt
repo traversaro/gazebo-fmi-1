@@ -59,6 +59,8 @@ if (USE_SYSTEM_FMILIBRARY)
 else()
     include(FetchFMILibrary)
 endif()
+find_package(MATIO QUIET)
+option(USE_MATIO "If TRUE/ON uses MATIO for logging purpouse" ${MATIO_FOUND})
 
 # Add extern libraries vendored (only used for the tests)
 if(BUILD_TESTING)

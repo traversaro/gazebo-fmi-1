@@ -319,6 +319,15 @@ bool FMUCoSimulation::setInputVariables(const std::vector< fmi2_value_reference_
     return true;
 }
 
+std::string FMUCoSimulation::getInstanceName()
+{
+    if (!this->isLoaded())
+    {
+        return "";
+    }
+
+    return m_pimpl->instanceName;
+}
 
 
 void FMUCoSimulation::unload()

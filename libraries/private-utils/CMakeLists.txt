@@ -8,11 +8,13 @@
 
 set(GazeboFMIPrivateUtils_HDR
     include/gazebo_fmi/FMUCoSimulation.hh
+    include/gazebo_fmi/FMULogger.hh
     include/gazebo_fmi/SDFConfigurationParsing.hh
 )
 
 add_library(GazeboFMIPrivateUtils SHARED ${GazeboFMIPrivateUtils_HDR}
                                          FMUCoSimulation.cc
+                                         FMULogger.cc
                                          SDFConfigurationParsing.cc)
 add_library(gazebo_fmi::GazeboFMIPrivateUtils ALIAS GazeboFMIPrivateUtils)
 
@@ -23,6 +25,10 @@ target_link_libraries(GazeboFMIPrivateUtils PRIVATE FMILibrary::FMILibrary)
 
 if(NOT MSVC)
     target_link_libraries(GazeboFMIPrivateUtils PUBLIC stdc++fs)
+endif()
+
+if(USE_MATIO)
+    target_compile_definitions(GazeboFMIPrivateUtils PUBLIC GAZEBO_FMI_USE_MATIO)
 endif()
 
 install(TARGETS GazeboFMIPrivateUtils
